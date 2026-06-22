@@ -6,9 +6,16 @@ LDFLAGS = -lm
 SRC_DIR = src
 OBJ_DIR = obj
 
-SRC = tuple.c tuple_utils.c print_utils.c main.c tuple_math1.c vector_math1.c
+MATRIX_DIR = matrix
 
-OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+SRC = tuple.c tuple_utils.c print_utils.c main.c tuple_math1.c vector_math1.c test_ch1.c 
+
+MATRIX_SRC = matrix.c matrix_math.c matrices.c invert_matrix.c invert_matrix_utils.c
+
+TEST_SRC = test_ch1.c
+
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o)) \
+$(addprefix $(OBJ_DIR)/$(MATRIX_DIR)/, $(MATRIX_SRC:.c=.o))
 
 LIBFT_DIR= ./libft
 LIBFT= ./libft/libft.a
@@ -41,6 +48,10 @@ $(LIBFT): $(LIBFT_OBJ)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/$(MATRIX_DIR)/%.o: $(SRC_DIR)/$(MATRIX_DIR)/%.c
+	mkdir -p $(OBJ_DIR)/$(MATRIX_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

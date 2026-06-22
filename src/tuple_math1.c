@@ -10,6 +10,8 @@ t_tuple *add_tuples(t_tuple t1, t_tuple t2)
         return (NULL);
     }
     result = ft_calloc(1, sizeof(t_tuple));
+    if(!result)
+        return(NULL);
     result->x = t1.x + t2.x;
     result->y = t1.y + t2.y;
     result->z = t1.z + t2.z;
@@ -27,6 +29,8 @@ t_tuple *sub_tuples(t_tuple t1, t_tuple t2)
         return (NULL);
     }
     result = ft_calloc(1, sizeof(t_tuple));
+    if(!result)
+        return(NULL);
     result->x = t1.x - t2.x;
     result->y = t1.y - t2.y;
     result->z = t1.z - t2.z;
@@ -38,6 +42,8 @@ t_tuple *negate_tuple(t_tuple t)
 {
     t_tuple* result;
     result = ft_calloc(1, sizeof(t_tuple));
+    if(!result)
+        return(NULL);
     result->x = 0 - t.x;
     result->y = 0 - t.y;
     result->z = 0 - t.z;
@@ -50,6 +56,8 @@ t_tuple *scale_tuple(t_tuple t, float scalar)
     t_tuple* result;
 
     result = ft_calloc(1, sizeof(t_tuple));
+    if(!result)
+        return(NULL);
     result->x = t.x * scalar;
     result->y = t.y * scalar;
     result->z = t.z * scalar;
@@ -62,6 +70,8 @@ t_tuple *divaide_tuple(t_tuple t, float num)
     t_tuple* result;
 
     result = ft_calloc(1, sizeof(t_tuple));
+    if(!result)
+        return(NULL);
     result->x = t.x / num;
     result->y = t.y / num;
     result->z = t.z / num;
