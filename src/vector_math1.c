@@ -54,7 +54,7 @@ t_tuple *cross_product(t_tuple t1, t_tuple t2)
 {
     if(is_equal_f(t1.w, 1) || is_equal_f(t2.w, 1))
     {
-        print_error_return("Cannot dot product points.\n",0);
+        print_error_return("Cannot cross product points.\n",0);
         return(0);
     }    
     return (

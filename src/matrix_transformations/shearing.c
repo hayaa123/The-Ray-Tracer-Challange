@@ -1,0 +1,18 @@
+#include "minirt.h"
+
+t_matrix *create_shear(float xy, float xz, float yx, float yz, float zx, float zy)
+{
+    t_matrix *result;
+
+    result = create_identity(4);
+    if(!result)
+        return (NULL);
+    result->data[0][1] = xy;
+    result->data[0][2] = xz;
+    result->data[1][0] = yx;
+    result->data[1][2] = yz;
+    result->data[2][0] = zx;
+    result->data[2][1] = zy;
+
+    return (result);
+}

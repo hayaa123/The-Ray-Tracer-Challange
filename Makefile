@@ -7,15 +7,19 @@ SRC_DIR = src
 OBJ_DIR = obj
 
 MATRIX_DIR = matrix
+MATRIX_TRANS_DIR = matrix_transformations
 
-SRC = tuple.c tuple_utils.c print_utils.c main.c tuple_math1.c vector_math1.c test_ch1.c 
+SRC = tuple.c tuple_utils.c print_utils.c main.c tuple_math1.c vector_math1.c test_ch1.c  test_ch2.c
 
 MATRIX_SRC = matrix.c matrix_math.c matrices.c invert_matrix.c invert_matrix_utils.c
+
+MATRIX_TRANS_SRC = translation.c scaling.c rotation.c shearing.c
 
 TEST_SRC = test_ch1.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o)) \
-$(addprefix $(OBJ_DIR)/$(MATRIX_DIR)/, $(MATRIX_SRC:.c=.o))
+$(addprefix $(OBJ_DIR)/$(MATRIX_DIR)/, $(MATRIX_SRC:.c=.o)) \
+$(addprefix $(OBJ_DIR)/$(MATRIX_TRANS_DIR)/, $(MATRIX_TRANS_SRC:.c=.o))
 
 LIBFT_DIR= ./libft
 LIBFT= ./libft/libft.a
@@ -52,6 +56,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(OBJ_DIR)/$(MATRIX_DIR)/%.o: $(SRC_DIR)/$(MATRIX_DIR)/%.c
 	mkdir -p $(OBJ_DIR)/$(MATRIX_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/$(MATRIX_TRANS_DIR)/%.o: $(SRC_DIR)/$(MATRIX_TRANS_DIR)/%.c
+	mkdir -p $(OBJ_DIR)/$(MATRIX_TRANS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

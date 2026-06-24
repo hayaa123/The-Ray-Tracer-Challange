@@ -1,9 +1,14 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
+#endif
+
 #include "libft.h"
-#include <math.h>
 #include <stdio.h>
+#include <math.h>
 
 typedef struct s_tuple
 {
@@ -46,8 +51,11 @@ int print_error_return(char *msg, int err);
 
 //testing 
 void test_ch1();
+void test_ch2();
 void is_equal_floats(float a, float b);
 void is_equal_tuples(t_tuple *t1, t_tuple *t2);
+void is_equal_matrix_test(t_matrix *m1, t_matrix *m2);
+void print_matrix(t_matrix *m);
 
 
 // matrix
@@ -63,17 +71,19 @@ float calc_det(t_matrix m);
 t_matrix *submatrix(t_matrix m, int row, int col);
 float minor(t_matrix m, int row, int col);
 float cofactor(t_matrix m, int row, int col);
-t_matrix *divide_matrix_by(t_matrix m, int num);
+t_matrix *divide_matrix_by(t_matrix m, float num);
 t_matrix *invert_matrix(t_matrix m);
 t_matrix *create_cofactor_matrix(t_matrix m);
-
-
 int is_equal_matrix(t_matrix t1, t_matrix t2);
 t_matrix *multi_matrix(t_matrix m1, t_matrix m2);
 t_tuple *multi_matrix_tuple(t_matrix m, t_tuple t);
-void print_matrix(t_matrix *m);
 
-
-
+// transformations
+t_matrix *create_translation(float x, float y, float z);
+t_matrix *create_scaling(float x, float y, float z);
+t_matrix *rotation_x(float radians);
+t_matrix *rotation_y(float radians);
+t_matrix *rotation_z(float radians);
+t_matrix *create_shear(float xy, float xz, float yx, float yz, float zx, float zy);
 
 #endif

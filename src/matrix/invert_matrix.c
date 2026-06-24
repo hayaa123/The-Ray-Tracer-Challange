@@ -73,7 +73,7 @@ float cofactor(t_matrix m, int row, int col)
     float min;
 
     min = minor(m, row, col);
-    if((row + col) % 2 != 0)
+    if((row + col) % 2 != 0 && !is_equal_f(min, 0))
         min = -1 * min;
     return (min);
 }
