@@ -15,6 +15,9 @@ You may notice that this repo includes my own libft library. This is because I a
 - Identity matrix and transpose operation.
 - Matrix inversion (including the calculation of determinants, cofactors, and minors, where a minor is the determinant of a submatrix at a given position).
 
+## Chapter 4 
+- Transformations : rotation, scailing, translation, shearing.
+
 # How to run the code?
 
 - First, clone the repository:
