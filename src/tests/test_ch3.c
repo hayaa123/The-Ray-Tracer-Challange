@@ -1,19 +1,6 @@
 #include "minirt.h"
 
-void is_equal_matrix_test(t_matrix *m1, t_matrix *m2)
-{
-    if(!is_equal_matrix(*m1, *m2))
-    {
-        printf("the two matrix are not equal\n");
-    }
-    else{
-        printf("Success\n");
-    }
-    free_matrix(m1);
-    free_matrix(m2);
-}
-
-void test_ch2()
+void test_ch3()
 {
     t_matrix *m = new_matrix((float[]){
         1 , 2 , 3 , 4,
@@ -113,10 +100,8 @@ void test_ch2()
         0 , 0 , 0 , 1 
     }, 4,4);
 
-    t_tuple *a = new_tuple(1,2,3,1);
-    is_equal_tuples(new_tuple(18, 24, 33, 1), multi_matrix_tuple(*m, *a));
-    free(a);
-    a = NULL;
+    t_tuple a = new_tuple(1,2,3,1);
+    is_equal_tuples(new_tuple(18, 24, 33, 1), multi_matrix_tuple(*m, a));
     free_matrix(m);
     m = NULL;
 

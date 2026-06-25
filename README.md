@@ -9,6 +9,10 @@ You may notice that this repo includes my own libft library. This is because I a
 - Tuple mathematics: addition, subtraction, negation, scaling, and division.
 - Vector operations: magnitude, normalization (converting to a unit vector), dot product, and cross product.
 
+# Chapter 2
+- Creating canvas and add pixels to it.
+- Convert the canvas to ppm file.
+
 ## Chapter 3
 - Matrix creation.
 - Matrix operations (multiplication, comparison).
@@ -39,3 +43,6 @@ You may notice that this repo includes my own libft library. This is because I a
 
 - The Ray Tracer Challange - Jamis Buck.
 - The 3Blue1Brown YouTube channel.
+
+# AI Usage:
+- Convert canvas to ppm optimization.

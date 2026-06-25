@@ -15,14 +15,14 @@ float vector_magnitude(t_tuple vector)
     ));
 }
 
-t_tuple *normalize_vector(t_tuple vector)
+t_tuple normalize_vector(t_tuple vector)
 {
     float magnituade;
 
     if(is_equal_f(vector.w, 1))
     {
         print_error_return("Cannot normalize a point.\n",0);
-        return(NULL);
+        return((t_tuple){0,0,0,0});
     }     
     magnituade = vector_magnitude(vector);
     return (
@@ -40,7 +40,7 @@ float dot_product(t_tuple t1, t_tuple t2)
     if(is_equal_f(t1.w, 1) || is_equal_f(t2.w, 1))
     {
         print_error_return("Cannot dot product points.\n",0);
-        return(0);
+        return (0);
     }    
     return (  
             t1.x * t2.x +
@@ -50,12 +50,12 @@ float dot_product(t_tuple t1, t_tuple t2)
     );
 }
 
-t_tuple *cross_product(t_tuple t1, t_tuple t2)
+t_tuple cross_product(t_tuple t1, t_tuple t2)
 {
     if(is_equal_f(t1.w, 1) || is_equal_f(t2.w, 1))
     {
         print_error_return("Cannot cross product points.\n",0);
-        return(0);
+        return((t_tuple){0,0,0,0});
     }    
     return (
         new_vector(

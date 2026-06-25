@@ -79,21 +79,21 @@ t_matrix *multi_matrix(t_matrix m1, t_matrix m2)
     return (result);
 }
 
-t_tuple *multi_matrix_tuple(t_matrix m, t_tuple t)
+t_tuple multi_matrix_tuple(t_matrix m, t_tuple t)
 {
     t_matrix *n;
     t_matrix *result;
-    t_tuple *returned_tup;
+    t_tuple returned_tup;
 
     if(m.col != 4)
-        return (NULL);
+        return ((t_tuple){0,0,0,0});
     n = new_matrix((float[]){t.x, t.y,t.z,t.w}, 1, 4);
     if(!n)
-        return (NULL);
+        return ((t_tuple){0,0,0,0});
     result = multi_matrix(m, *n);
     free_matrix(n);
     if(!result)
-        return (NULL);
+        return ((t_tuple){0,0,0,0});
     returned_tup = new_tuple(result->data[0][0], result->data[1][0], result->data[2][0], result->data[3][0]);
     free_matrix(result);
     return (returned_tup);

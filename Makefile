@@ -1,25 +1,31 @@
 NAME = minirt
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I./include -I./libft
+DEBUGFLAGS = -g
 LDFLAGS = -lm
 
 SRC_DIR = src
 OBJ_DIR = obj
 
+CANVAS_DIR = canvas
+TEST_DIR = tests
 MATRIX_DIR = matrix
 MATRIX_TRANS_DIR = matrix_transformations
+EXERCISES_DIR =  exercises
 
-SRC = tuple.c tuple_utils.c print_utils.c main.c tuple_math1.c vector_math1.c test_ch1.c  test_ch2.c
-
+SRC = tuple.c tuple_utils.c print_utils.c main.c tuple_math1.c vector_math1.c
+CANVAS_SRC = color.c color_math.c canvas.c canvas_to_ppm.c
+TEST_SRC = test_utils.c test_ch1.c test_ch2.c test_ch3.c test_ch4.c
 MATRIX_SRC = matrix.c matrix_math.c matrices.c invert_matrix.c invert_matrix_utils.c
-
 MATRIX_TRANS_SRC = translation.c scaling.c rotation.c shearing.c
-
-TEST_SRC = test_ch1.c
+EXERCISES_SRC = projectile.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o)) \
+$(addprefix $(OBJ_DIR)/$(CANVAS_DIR)/, $(CANVAS_SRC:.c=.o)) \
+$(addprefix $(OBJ_DIR)/$(TEST_DIR)/, $(TEST_SRC:.c=.o)) \
 $(addprefix $(OBJ_DIR)/$(MATRIX_DIR)/, $(MATRIX_SRC:.c=.o)) \
-$(addprefix $(OBJ_DIR)/$(MATRIX_TRANS_DIR)/, $(MATRIX_TRANS_SRC:.c=.o))
+$(addprefix $(OBJ_DIR)/$(MATRIX_TRANS_DIR)/, $(MATRIX_TRANS_SRC:.c=.o)) \
+$(addprefix $(OBJ_DIR)/$(EXERCISES_DIR)/, $(EXERCISES_SRC:.c=.o))
 
 LIBFT_DIR= ./libft
 LIBFT= ./libft/libft.a
@@ -41,11 +47,8 @@ all: $(NAME)
 $(NAME) :  $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -L. $(LIBFT) $(LDFLAGS) -o $(NAME)
 
-bonus: .bonus
-
-.bonus: $(LIBFT) $(BONUS_OBJ)
-	$(CC) $(CFLAGS) $(BONUS_OBJ) -L. $(LIBFT)  $(LDFLAGS) -o $(NAME)
-	@touch .bonus
+debug: CFLAGS+=$(DEBUGFLAGS)
+debug: all
 
 $(LIBFT): $(LIBFT_OBJ)
 	make bonus -C $(LIBFT_DIR)
@@ -54,12 +57,24 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(OBJ_DIR)/$(CANVAS_DIR)/%.o: $(SRC_DIR)/$(CANVAS_DIR)/%.c
+	mkdir -p $(OBJ_DIR)/$(CANVAS_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/$(TEST_DIR)/%.o: $(SRC_DIR)/$(TEST_DIR)/%.c
+	mkdir -p $(OBJ_DIR)/$(TEST_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 $(OBJ_DIR)/$(MATRIX_DIR)/%.o: $(SRC_DIR)/$(MATRIX_DIR)/%.c
 	mkdir -p $(OBJ_DIR)/$(MATRIX_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/$(MATRIX_TRANS_DIR)/%.o: $(SRC_DIR)/$(MATRIX_TRANS_DIR)/%.c
 	mkdir -p $(OBJ_DIR)/$(MATRIX_TRANS_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/$(EXERCISES_DIR)/%.o: $(SRC_DIR)/$(EXERCISES_DIR)/%.c
+	mkdir -p $(OBJ_DIR)/$(EXERCISES_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

@@ -47,6 +47,7 @@ float **create_empty_data(int col, int row)
                 free(data[i]);
                 data[i] = NULL;
             }
+            free(data);
             return (NULL);
         }
         i++;
@@ -92,7 +93,10 @@ t_matrix *new_matrix(float *values, int col, int row)
         return (NULL);
     m->data = create_data(values, col, row);
     if(!m->data)
+    {
+        free(m);
         return (NULL);
+    }
     return (m);
 }
 
